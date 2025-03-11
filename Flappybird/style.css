@@ -1,0 +1,146 @@
+@font-face {
+  font-family: 'PixelFont';
+  src: url('pixel-font.ttf');
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: 'PixelFont', Arial, sans-serif;
+  background: url('retro-background.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh; /* Ensure the body fills the screen */
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.retro-title {
+  font-size: 48px;
+  color: white;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
+
+.retro-button {
+  background: #333;
+  color: white;
+  font-size: 24px;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.retro-button:hover {
+  background: #555;
+}
+
+#pause-menu, #game-over-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  z-index: 100;
+  display: none; /* Start with hidden pause menu */
+}
+
+#pause-menu h2, #game-over-screen h2 {
+  font-size: 36px;
+  margin-bottom: 20px; /* Added margin to make it more balanced */
+}
+
+#pause-menu button, #game-over-screen button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #4CAF50;  /* Same color as button hover */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#pause-menu button:hover, #game-over-screen button:hover {
+  background-color: #45a049;
+}
+
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Canvas above the background */
+}
+
+#gameContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url('fbb.jpg'); /* Replace with your map image */
+  background-size: cover; /* Ensures the map covers the entire container */
+  background-position: center; /* Centers the background image */
+  z-index: 0; /* Make sure the game container stays below the canvas and other UI elements */
+}
+
+#skin-selector-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 16px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  z-index: 101; /* Ensure it’s above other elements */
+}
+
+/* Optional: Add some animation for a more retro feel */
+@keyframes retro-glow {
+  0% {
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    text-shadow: 3px 3px 10px rgb(58, 9, 144), 0 0 20px rgb(34, 13, 152);
+  }
+  100% {
+    text-shadow: 3px 3px 5px rgba(0, 72, 255, 0.8), 0 0 25px rgba(17, 0, 255, 0.8);
+  }
+}
+
+.retro-title {
+  animation: retro-glow 1.5s infinite alternate;
+}
+
+.elimination-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: bold;
+  color: red;
+  background: black;
+  padding: 15px;
+  border-radius: 10px;
+  animation: flash 0.5s infinite alternate;
+}
+
+@keyframes flash {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

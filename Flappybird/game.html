@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="gameContainer">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Game Over Screen -->
+  <div id="game-over-screen" style="display: none;">
+    <h2 id="game-over-message">You Died!</h2>
+    <button id="restart-button">Restart</button>
+   <button id="back-to-menu-button">Back to Menu</button>
+  </div>
+  
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="hidden">
+      <h2>Game Paused</h2>
+      <button onclick="togglePause()">Resume</button>
+      <button onclick="goToMenu()">Back to Main Menu</button>
+    </div>
+
+    <!-- Skin Selector -->
+    <div>
+      <label for="skinSelector">Choose Bird Skin: </label>
+      <select id="skinSelector">
+        <option value="default">Default</option>
+        <option value="alternate">Alternate</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+
+  <script>
+    // Get mode and player names from localStorage
+    const gameMode = localStorage.getItem('gameMode');
+    const player1Name = localStorage.getItem('player1Name') || 'Player 1';
+    const player2Name = localStorage.getItem('player2Name') || 'Player 2';
+    const player3Name = localStorage.getItem('player3Name') || 'Player 3';
+    const player4Name = localStorage.getItem('player4Name') || 'Player 4';
+
+    // Set the bird skin based on selection
+    const skinSelector = document.getElementById('skinSelector');
+    skinSelector.addEventListener('change', function() {
+      localStorage.setItem('birdSkin', skinSelector.value);
+    });
+
+    // Retrieve saved skin choice (default or alternate)
+    const birdSkin = localStorage.getItem('birdSkin') || 'default';
+
+    // Set player names dynamically if needed
+    document.getElementById('player1-name').textContent = player1Name;
+    document.getElementById('player2-name').textContent = player2Name;
+    document.getElementById('player3-name').textContent = player3Name;
+    document.getElementById('player4-name').textContent = player4Name;
+
+    // Adjust skin settings for the bird depending on selection (apply skin logic inside the game logic).
+    const birdImage = birdSkin === 'alternate' ? 'alternate-bird.png' : 'default-bird.png';
+  </script>
+</body>
+</html>

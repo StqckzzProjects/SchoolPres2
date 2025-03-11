@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird - Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="settings">
+    <h1 class="retro-title">Settings</h1>
+    <div class="control-settings">
+      <label for="player1-key">Player 1 Jump Key:</label>
+      <input type="text" id="player1-key" placeholder="Press a key" maxlength="1" />
+    </div>
+    <div class="control-settings">
+      <label for="player2-key">Player 2 Jump Key:</label>
+      <input type="text" id="player2-key" placeholder="Press a key" maxlength="1" />
+    </div>
+    <div class="control-settings">
+      <label for="player3-key">Player 3 Jump Key:</label>
+      <input type="text" id="player3-key" placeholder="Press a key" maxlength="1" />
+    </div>
+    <div class="control-settings">
+      <label for="player4-key">Player 4 Jump Key:</label>
+      <input type="text" id="player4-key" placeholder="Press a key" maxlength="1" />
+    </div>
+    <button class="retro-button" onclick="saveControls()">Save Controls</button>
+    <button class="retro-button" onclick="goBack()">Back to Menu</button>
+  </div>
+
+  <script>
+    // Capture key press dynamically
+    let currentInput = null;
+
+    // Add event listeners to the input fields
+    document.getElementById('player1-key').addEventListener('focus', function() {
+      currentInput = 'player1';
+    });
+
+    document.getElementById('player2-key').addEventListener('focus', function() {
+      currentInput = 'player2';
+    });
+
+    document.getElementById('player3-key').addEventListener('focus', function() {
+      currentInput = 'player3';
+    });
+
+    document.getElementById('player4-key').addEventListener('focus', function() {
+      currentInput = 'player4';
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if (currentInput) {
+        if (currentInput === 'player1') {
+          document.getElementById('player1-key').value = e.key;
+        } else if (currentInput === 'player2') {
+          document.getElementById('player2-key').value = e.key;
+        } else if (currentInput === 'player3') {
+          document.getElementById('player3-key').value = e.key;
+        } else if (currentInput === 'player4') {
+          document.getElementById('player4-key').value = e.key;
+        }
+        currentInput = null;  // Reset after key press
+      }
+    });
+
+    // Save the customized controls to local storage
+    function saveControls() {
+      const player1Key = document.getElementById('player1-key').value;
+      const player2Key = document.getElementById('player2-key').value;
+      const player3Key = document.getElementById('player3-key').value;
+      const player4Key = document.getElementById('player4-key').value;
+
+      localStorage.setItem('player1Key', player1Key);
+      localStorage.setItem('player2Key', player2Key);
+      localStorage.setItem('player3Key', player3Key);
+      localStorage.setItem('player4Key', player4Key);
+
+      // Redirect to the main menu after saving
+      window.location.href = 'index.html';
+    }
+
+    // Back to main menu
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

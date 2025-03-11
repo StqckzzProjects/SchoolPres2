@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stqckzz Bird - Main Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu">
+    <h1 class="retro-title">Stqckzz Bird</h1>
+    <button class="retro-button" onclick="startGame('single')">1 Player</button>
+    <button class="retro-button" onclick="startGame('multi')">2 Player</button>
+    <button class="retro-button" onclick="startGame('race')">Race Mode</button>
+    <button class="retro-button" onclick="goToSettings()">Settings</button>
+  </div>
+
+  <!-- Player Name Customization Form -->
+  <div id="name-form" style="display: none;">
+    <h1>Enter Your Name</h1>
+    <label for="player1-name">Player 1 Name: </label>
+    <input type="text" id="player1-name" placeholder="Enter Player 1's name">
+    <br>
+    <label for="player2-name">Player 2 Name: </label>
+    <input type="text" id="player2-name" placeholder="Enter Player 2's name">
+    <br>
+    <label for="player3-name">Player 3 Name (optional): </label>
+    <input type="text" id="player3-name" placeholder="Enter Player 3's name">
+    <br>
+    <label for="player4-name">Player 4 Name (optional): </label>
+    <input type="text" id="player4-name" placeholder="Enter Player 4's name">
+    <br>
+    <button id="start-button">Start Game</button>
+  </div>
+
+  <script>
+    // Function to start the game with selected mode
+    function startGame(mode) {
+      // Save the selected mode in localStorage
+      localStorage.setItem('gameMode', mode);
+
+      // Show the name input form if starting the game
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById('name-form').style.display = 'block';
+    }
+
+    // Event listener for starting the game after customizing player names
+    document.getElementById('start-button').addEventListener('click', () => {
+      const player1NameInput = document.getElementById('player1-name').value;
+      const player2NameInput = document.getElementById('player2-name').value;
+      const player3NameInput = document.getElementById('player3-name').value;
+      const player4NameInput = document.getElementById('player4-name').value;
+
+      // Save names to localStorage for later use
+      localStorage.setItem('player1Name', player1NameInput || 'Player 1');
+      localStorage.setItem('player2Name', player2NameInput || 'Player 2');
+      localStorage.setItem('player3Name', player3NameInput || 'Player 3');
+      localStorage.setItem('player4Name', player4NameInput || 'Player 4');
+
+      // Hide the name entry form and start the game
+      document.getElementById('name-form').style.display = 'none';
+      window.location.href = `game.html?mode=${localStorage.getItem('gameMode')}`;
+    });
+
+    // Function to go to settings page
+    function goToSettings() {
+      window.location.href = 'settings.html';
+    }
+  </script>
+</body>
+</html>
